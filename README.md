@@ -1,9 +1,12 @@
 # DeckBuilder
 
+This is a simple deck builder made with Unity3D
+
 Credits:
 https://pokemontcg.io/.
 
 Builds/Executables:
+
   Android:
     https://drive.google.com/file/d/1yDHQyLyDmfh3eMRkhfqoK7_TL-KGrW5t/view?usp=sharing
 
