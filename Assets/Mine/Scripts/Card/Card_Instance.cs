@@ -6,7 +6,7 @@ namespace DK
 {
     public class Card_Instance : MonoBehaviour
     {
-        private Card card = new Card();
+        [HideInInspector] public Card card = new Card();
 
         public TextMeshProUGUI text;
 

@@ -1127,6 +1127,7 @@ GameObject:
   - component: {fileID: 1790532544}
   - component: {fileID: 1790532546}
   - component: {fileID: 1790532547}
+  - component: {fileID: 1790532548}
   m_Layer: 0
   m_Name: NewCard
   m_TagString: Untagged
@@ -1146,8 +1147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bf7d5df48fce84abc2da7c0d99b7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pokemonName: Exeggutor
+  pokemonName: Groudon
   index: 1
+  newCardDone: 1
 --- !u!4 &1790532545
 Transform:
   m_ObjectHideFlags: 0
@@ -1210,11 +1212,86 @@ MonoBehaviour:
     cardIndex: 1
   - cardName: Blastoise
     cardIndex: 1
+  - cardName: Butterfree
+    cardIndex: 0
+  - cardName: Nidoqueen
+    cardIndex: 0
+  - cardName: Diglett
+    cardIndex: 0
+  - cardName: Machamp
+    cardIndex: 0
+  - cardName: Weepinbell
+    cardIndex: 0
+  - cardName: Geodude
+    cardIndex: 0
+  - cardName: Dodrio
+    cardIndex: 0
+  - cardName: Electrode
+    cardIndex: 0
+  - cardName: Hitmonchan
+    cardIndex: 0
+  - cardName: Weezing
+    cardIndex: 0
+  - cardName: Seaking
+    cardIndex: 0
+  - cardName: Electabuzz
+    cardIndex: 0
+  - cardName: Togepi
+    cardIndex: 0
+  - cardName: Sudowoodo
+    cardIndex: 0
+  - cardName: Wobbuffet
+    cardIndex: 0
+  - cardName: Heracross
+    cardIndex: 0
+  - cardName: Tyranitar
+    cardIndex: 0
+  - cardName: Suicune
+    cardIndex: 0
+  - cardName: Grovyle
+    cardIndex: 0
+  - cardName: Lugia
+    cardIndex: 0
+  - cardName: Mightyena
+    cardIndex: 0
+  - cardName: Ludicolo
+    cardIndex: 0
+  - cardName: Slakoth
+    cardIndex: 0
+  - cardName: Hariyama
+    cardIndex: 0
+  - cardName: Aggron
+    cardIndex: 0
+  - cardName: Meditite
+    cardIndex: 0
+  - cardName: Camerupt
+    cardIndex: 0
+  - cardName: Cacnea
+    cardIndex: 0
+  - cardName: Altaria
+    cardIndex: 0
+  - cardName: Crawdaunt
+    cardIndex: 0
+  - cardName: Milotic
+    cardIndex: 0
+  - cardName: Absol
+    cardIndex: 0
+  - cardName: Metagross
+    cardIndex: 0
+  - cardName: Latios
+    cardIndex: 0
+  - cardName: Groudon
+    cardIndex: 0
+  - cardName: Rayquaza
+    cardIndex: 0
+  - cardName: Kyogre
+    cardIndex: 0
   percentDone: 0
   slider: {fileID: 1451919302}
   allLoadedEvent:
     m_PersistentCalls:
       m_Calls: []
+  createdSomething: 0
 --- !u!114 &1790532547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,6 +1305,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: DeckBuilderScene
+--- !u!114 &1790532548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790532543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74317a69ba048f04ca83a400f73ad528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allCards: []
+  errorOccured: 0
+  loadOnAwake: 0
 --- !u!1 &2137410131
 GameObject:
   m_ObjectHideFlags: 0

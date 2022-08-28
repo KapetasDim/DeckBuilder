@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace DK
         private float scrollTimer;
 
         private int[] cardDisplayOrder;
-        private List<GameObject> card_instances = new List<GameObject>();
+        private readonly List<Card_Instance> card_instances = new List<Card_Instance>();
 
         private void Start()
         {
@@ -52,8 +53,7 @@ namespace DK
                 //make all the necessary instances
                 GameObject _instance = Instantiate(cardPrefab, Vector3.zero, Quaternion.identity,
                     cardsParent != null ? cardsParent : this.transform);
-                card_instances.Add(_instance);
-                
+
                 //AssignTheCorrectImages
                 RawImage rawImage = _instance.GetComponentInChildren<RawImage>();
                 //rawImage.texture = loadAllCards.allCards_Images[i];
@@ -61,8 +61,9 @@ namespace DK
 
                 //initialize the Card
                 Card_Instance _cardInstance = _instance.GetComponent<Card_Instance>();
-                _cardInstance.Init(loadAllCards.allCards[i] , loadAllCards.allCards[i].fileName);
-                
+                _cardInstance.Init(loadAllCards.allCards[i], loadAllCards.allCards[i].fileName);
+                card_instances.Add(_cardInstance);
+
                 //Assign The Correct names
                 _cardInstance.text.text = loadAllCards.allCards[i].name;
             }
@@ -133,6 +134,139 @@ namespace DK
             int cardRows = (int)(math.ceil((float)cardDisplayOrder.Length / cardsInRow));
             targetFirstCardOffset.y = Mathf.Clamp(targetFirstCardOffset.y, initialCardOffset.y,
                 (cardRows - minimumVisibleRows) * (cardSize.y + cardDistance.y) + initialCardOffset.y);
+        }
+
+        public void OrderByType()
+        {
+            loadAllCards.allCards = loadAllCards.allCards.OrderBy(x => x.subtype).ToList();
+
+            ReOrder();
+        }
+
+        public void OrderByHP()
+        {
+            loadAllCards.allCards = loadAllCards.allCards.OrderBy(x => x.hp).ToList();
+            ReOrder();
+        }
+
+        public void OrderByRarity()
+        {
+            loadAllCards.allCards = loadAllCards.allCards.OrderBy(x => x.rarity).ToList();
+            ReOrder();
+        }
+
+        public void OrderByName()
+        {
+            loadAllCards.allCards = loadAllCards.allCards.OrderBy(x => x.fileName).ToList();
+            ReOrder();
+        }
+
+        private void ReOrder()
+        {
+            // foreach (var card in loadAllCards.allCards)
+            // {
+            //     Debug.Log("card.name: " + card.name + " , card.rarity: " + card.rarity + " , card.subtype: " + card.subtype + " , card.hp: " + card.hp);
+            // }
+            
+            for (int i = 0; i < card_instances.Count; i++)
+            {
+                var _instance = card_instances[i];
+                //AssignTheCorrectImages
+                RawImage rawImage = _instance.GetComponentInChildren<RawImage>();
+                //rawImage.texture = loadAllCards.allCards_Images[i];
+                rawImage.texture = Load_Image.GetImage(loadAllCards.allCards[i].fileName);
+
+                //initialize the Card
+                _instance.Init(loadAllCards.allCards[i], loadAllCards.allCards[i].fileName);
+
+                //Assign The Correct names
+                _instance.text.text = loadAllCards.allCards[i].name;
+            }
+            
+            MakeDisplay();
+        }
+
+        // public void OrderByType()
+        // {
+        //     List<string> cardTypes = new List<string>();
+        //
+        //     List<Card> cardsToOrder = loadAllCards.allCards;
+        //
+        //     List<Card> cardsOrdered = new List<Card>();
+        //
+        //     cardTypes.Add(cardsToOrder[0].subtype);
+        //     cardsOrdered.Add(cardsToOrder[0]);
+        //     cardsToOrder.Remove(cardsToOrder[0]);
+        //
+        //     bool addNextType = false;
+        //     
+        //     for (int i = 0; i < cardsToOrder.Count; i++)
+        //     {
+        //         if (cardTypes.Contains(cardsToOrder[i].subtype))
+        //         {
+        //             cardsOrdered.Add(cardsToOrder[i]);
+        //             cardsToOrder.Remove(cardsToOrder[i]);
+        //             
+        //
+        //             if (cardsToOrder.Count != 0)
+        //                 i = 0;
+        //             else
+        //                 break;
+        //         }
+        //         else
+        //         {
+        //             if (addNextType)
+        //             {
+        //                 addNextType = false;
+        //                 cardTypes.Add(cardsToOrder[i].subtype);
+        //                 cardsOrdered.Add(cardsToOrder[i]);
+        //                 cardsToOrder.Remove(cardsToOrder[i]);
+        //
+        //                 if (cardsToOrder.Count != 0)
+        //                     i = 0;
+        //                 else
+        //                     break;
+        //             }
+        //         }
+        //
+        //         if (i == cardsToOrder.Count - 1)
+        //         {
+        //             addNextType = true;
+        //             i = 0;
+        //         }
+        //     }
+        //
+        //     if (cardDisplayOrder.Length != cardsOrdered.Count)
+        //     {
+        //         Debug.LogError("Lengths dont match -->>  cardDisplayOrder.Length = " + cardDisplayOrder.Length + " , cardsOrdered.Count = " + cardsOrdered.Count);
+        //     }
+        //     
+        //     int displayOrder = 0;
+        //     for (int i = 0; i < cardsOrdered.Count; i++)
+        //     {
+        //         int index = GetIndexOfItemInList(loadAllCards.allCards , cardsOrdered[i]);
+        //         Debug.Log("index = " + index);
+        //         if(index == -1) continue;
+        //         cardDisplayOrder[index] = displayOrder;
+        //         displayOrder += 1;
+        //     }
+        //     
+        //     
+        //     Debug.Log("cardTypes.Count: " + cardTypes.Count);
+        //     
+        //     MakeDisplay();
+        // }
+
+        private static int GetIndexOfItemInList(IReadOnlyList<Card> _list, Card item)
+        {
+            for (int i = 0; i < _list.Count; i++)
+            {
+                Debug.Log(" _list[i].fileName = " + _list[i].fileName);
+                Debug.Log(" item[i].fileName = " + item.fileName);
+                if (_list[i].fileName == item.fileName) return i;
+            }
+
+            return -1;
         }
     }
 }

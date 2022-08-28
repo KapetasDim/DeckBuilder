@@ -14,7 +14,6 @@ Sandslash
 snorlax
 Typhlosion
 Exeggutor 
-
 Blastoise 
 Butterfree 
 Nidoqueen 
@@ -42,7 +41,6 @@ Slakoth
 Hariyama 
 Aggron 
 Meditite 
-Meditite 
 Camerupt 
 Cacnea 
 Altaria 
@@ -50,6 +48,7 @@ Crawdaunt
 Milotic 
 Absol 
 Metagross 
+
 Latios 
 Groudon 
 Rayquaza 
