@@ -11,9 +11,12 @@ namespace DK
     {
         private LoadAllDecks loadAllDecks;
 
+        private SelectDeck selectDeck;
+
         private void Start()
         {
             loadAllDecks = GetComponent<LoadAllDecks>();
+            selectDeck = GetComponent<SelectDeck>();
         }
 
         public void NewDeck()
@@ -26,6 +29,26 @@ namespace DK
             {
                 deckName = _deckName
             };
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Directory.CreateDirectory(Application.persistentDataPath + "/Decks/");
+            string path = Application.persistentDataPath + "/Decks/" + _deckName;
+
+            FileStream stream = new FileStream(path, FileMode.Create);
+
+            formatter.Serialize(stream, data);
+            stream.Close();
+
+            loadAllDecks.Load_AllDecks();
+            loadAllDecks.listUpdated.Invoke();
+        }
+
+        public void SaveDeck()
+        {
+            if(!selectDeck.deckAssigned) return;
+            
+            string _deckName = selectDeck.deck.deckName;
+            Deck data = selectDeck.deck;
 
             BinaryFormatter formatter = new BinaryFormatter();
             Directory.CreateDirectory(Application.persistentDataPath + "/Decks/");
